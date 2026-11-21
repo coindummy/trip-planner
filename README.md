@@ -22,3 +22,7 @@ python scripts/test_list.py "https://maps.app.goo.gl/XXXX"
 2. Build ayarları: Framework preset **None**, Build command **boş**, Build output directory **`public`**.
 3. Deploy. `functions/` klasörü otomatik olarak `/api/*` altında çalışır.
 4. `https://<proje>.pages.dev` adresini iPhone'da açıp linki yapıştır.
+
+### Workers olarak deploy edildiyse
+
+Cloudflare projeyi **Worker** olarak oluşturduysa `wrangler.jsonc` + `src/worker.js` devreye girer: `/api/*` istekleri aynı fonksiyonlara yönlenir, geri kalanı `public/` klasöründen sunulur. `wrangler.jsonc` içindeki `name`, dashboard'daki Worker adıyla aynı olmalı.
