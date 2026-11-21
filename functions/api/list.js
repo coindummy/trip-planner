@@ -99,7 +99,15 @@ async function fetchPlaces(listId, token, jar) {
   return { title, places: raw.map(parsePlace) };
 }
 
-export async function onRequestGet({ request }) {
+export async function onRequestGet(ctx) {
+  try {
+    return await handle(ctx);
+  } catch (e) {
+    return json({ error: "Beklenmeyen hata: " + String(e?.message || e) }, 500);
+  }
+}
+
+async function handle({ request }) {
   const target = new URL(request.url).searchParams.get("url");
   if (!target) return json({ error: "url parametresi eksik" }, 400);
 

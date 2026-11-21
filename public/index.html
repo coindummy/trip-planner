@@ -45,7 +45,10 @@
     statusEl.textContent = 'Liste getiriliyor…';
     try {
       const r = await fetch('/api/list?url=' + encodeURIComponent(document.getElementById('u').value.trim()));
-      const d = await r.json();
+      const body = await r.text();
+      let d;
+      try { d = JSON.parse(body); }
+      catch { throw new Error(`Sunucu JSON döndürmedi (HTTP ${r.status}). Yanıtın başı: ${body.slice(0, 150) || '(boş)'}`); }
       if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
       statusEl.textContent = `${d.title || 'Liste'} · ${d.count} yer`;
       listEl.innerHTML = d.places.map(p => `
