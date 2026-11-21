@@ -3,10 +3,14 @@
 // everything else is served from ./public.
 import { onRequestGet as listHandler } from "../functions/api/list.js";
 import { onRequestGet as pingHandler } from "../functions/api/ping.js";
+import { onRequestGet as detailsHandler } from "../functions/api/details.js";
+import { onRequestGet as usageHandler } from "../functions/api/usage.js";
 
 const routes = {
   "/api/list": listHandler,
   "/api/ping": pingHandler,
+  "/api/details": detailsHandler,
+  "/api/usage": usageHandler,
 };
 
 export default {
